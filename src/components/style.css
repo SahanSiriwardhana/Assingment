@@ -15,7 +15,9 @@
     align-items: center;
     justify-content: center;
   }
-
+.RowAuth{
+  margin-top:20px; 
+}
   .button1{
     color: aliceblue;
   }

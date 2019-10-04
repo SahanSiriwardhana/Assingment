@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container,   Form, FormGroup, Label, Input,Col,Card, CardHeader,  CardBody,
+import { Container,   Form, FormGroup, Label, Input,Col, CardHeader,  CardBody,
      } from 'reactstrap';
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
@@ -7,12 +7,52 @@ import './style.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import {Link} from 'react-router-dom';
+
+import './style.css'
+import clsx from 'clsx';
+
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
+import purple from '@material-ui/core/colors/purple';
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
   },
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
 }));
-
+const classes = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  textField: {
+    flexBasis: 2000,
+  },
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
+}));
  class Register extends Component {
    
     constructor(props){
@@ -27,9 +67,14 @@ const useStyles = makeStyles(theme => ({
             name: '',
             email :'',
             password:'',
-            confirmPassword:''
-            
+            confirmPassword:'',
+            showPassword:false,
         }
+    }
+    handleClickShowPassword=()=>{
+      this.setState({
+        showPassword:!this.state.showPassword,
+      });
     }
     onChangeUsername(e){
         this.setState({
@@ -74,51 +119,99 @@ const useStyles = makeStyles(theme => ({
     render() {
      
     return (
-        <Container className="regContiner">
-             <Col md={5} >
-
-             <Paper>
-                
-                <Typography component="p">
-                
-                
-
-             <Card>
-             <CardHeader>Registration form</CardHeader>
-
-             <CardBody>
+       
+      <div>
+        <Card className={classes.card}>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                Registration form
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                <hr/>
+                </Typography>
           <Form>
           <FormGroup>
-          <Label for="exampleAddress">Username</Label>
-          <Input type="text" name="username" id="exampleAddress" placeholder="Enter Username"
-          value={this.state.name}
+         
+          
+          <TextField
+                            id="outlined-simple-start-adornment"
+                            // className={clsx(classes.margin, classes.textField)}
+                            variant="outlined"
+                            label="Full Name"
+                            fullWidth
+                            value={this.state.name}
           onChange={this.onChangeUsername}
-          />
+                          />
         </FormGroup>
           <FormGroup>
-          <Label for="exampleAddress">Email</Label>
-          <Input type="email" name="email" id="exampleAddress" placeholder="Enter Email"
-          value={this.state.email}
-          onChange={this.onChangeEmail}
-          />
+          
+             <TextField
+                            id="outlined-simple-start-adornment"
+                            // className={clsx(classes.margin, classes.textField)}
+                            variant="outlined"
+                            label="Email"
+                            fullWidth
+                            value={this.state.email}
+                            onChange={this.onChangeEmail}
+                          />
         </FormGroup>
         <FormGroup>
-          <Label for="exampleAddress">Password</Label>
-          <Input type="password" name="password" id="exampleAddress" placeholder="Enter Password"
-          value={this.state.password}
-          onChange={this.onChangePassword}
-          />
+          
+          <TextField
+                              id="outlined-adornment-password"
+                              className={clsx(classes.margin, classes.textField)}
+                              variant="outlined"
+                              type={this.state.showPassword ? 'text' : 'password'}
+                              label="Password"
+                              value={this.state.password}
+                              onChange={this.onChangePassword}
+                              fullWidth
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      edge="end"
+                                      aria-label="toggle password visibility"
+                                      onClick={this.handleClickShowPassword}
+                                    
+                                    >
+                                      {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }}
+                            />
         </FormGroup>
         <FormGroup>
-          <Label for="exampleAddress2">Confirm Passowrd</Label>
-          <Input type="password" name="cpassword" id="exampleAddress2" placeholder="Enter Confirm Password"
-          value={this.state.confirmPassword}
-          onChange={this.onChangeConfirmPassword}
-          />
+         
+          <TextField
+                              id="outlined-adornment-password"
+                              className={clsx(classes.margin, classes.textField)}
+                              variant="outlined"
+                              type={this.state.showPassword ? 'text' : 'password'}
+                              label="Password"
+                              value={this.state.confirmPassword}
+                              onChange={this.onChangeConfirmPassword}
+                              fullWidth
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      edge="end"
+                                      aria-label="toggle password visibility"
+                                      onClick={this.handleClickShowPassword}
+                                    
+                                    >
+                                      {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }}
+                            />
         </FormGroup>
        
-        <Button variant="contained" color="primary" onClick={this.onSubmit}>
-          Submit
+        <Button variant="contained" color="primary"  fullWidth onClick={this.onSubmit}>
+          Register
         </Button>
       </Form>
 
@@ -126,13 +219,13 @@ const useStyles = makeStyles(theme => ({
         
         
        
-        </CardBody>
        
-      </Card>
-      </Typography>
-              </Paper>
-      </Col>
-      </Container>
+       
+        </CardContent>
+            </Card>
+      
+              
+              </div>
     )
   }
 }

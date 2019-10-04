@@ -51,7 +51,13 @@ export default class TableRows extends Component {
     this.setState({
       number:(this.state.number+1),
     })
-    console.log(this.state.number)
+    // let des= confirm("Are you sure ?");
+    // if(des){
+    //   console.log(des);
+    // }else{
+    //   console.log(des);
+    // }
+    // console.log(this.state.number)
   }
 
   componentDidMount(){
@@ -68,11 +74,11 @@ export default class TableRows extends Component {
           <TableCell align="left">{this.props.obj.email}</TableCell>
           <TableCell align="left">
             <IconButton className={classes.button} aria-label="delete" color="secondary" 
-            onClick={this.handleClickOpen}>
+            onClick={this.clickMe}>
               <DeleteIcon />
             </IconButton>
           </TableCell>
-          <Dialog
+          {/* <Dialog
             open={this.open}
             onClose={this.handleClose}
             aria-labelledby="alert-dialog-title"
@@ -93,7 +99,7 @@ export default class TableRows extends Component {
                 Agree
               </Button>
             </DialogActions>
-          </Dialog>
+          </Dialog> */}
       </TableRow>
       
     );
